@@ -48,7 +48,7 @@ body {
 }
 
 .contenedor_personaje {
-    background-color: rgb(101, 101, 101);
+    background-color: rgb(46, 46, 46);
     color: rgb(255, 255, 255);
     border-radius: 4px;
     display: flex;
