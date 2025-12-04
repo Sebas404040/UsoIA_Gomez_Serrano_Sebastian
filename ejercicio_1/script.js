@@ -28,11 +28,11 @@ function mostrarPersonajes(personajes) {
         img.classList.add("imagen_personaje")
 
         const nombre = document.createElement("span");
-        nombre.className.add("nombre_span")
+        nombre.classList.add("nombre_span")
         nombre.textContent = personaje.name
 
         const status = document.createElement("span")
-        status.className.add("status_span")
+        status.classList.add("status_span")
         status.textContent = `Estado: ${personaje.status}`
 
         contenedor_personaje.appendChild(img)
