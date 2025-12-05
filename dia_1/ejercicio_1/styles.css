@@ -22,7 +22,7 @@ body {
     gap: 10px;
 }
 
-.input_1 {
+#input_busqueda {
     color: rgb(0, 0, 0);
     font-size: 20px;
     background-color: aliceblue;

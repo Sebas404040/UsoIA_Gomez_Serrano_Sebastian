@@ -1,27 +1,17 @@
 const contenedor_personajes = document.getElementById("contenedor_personajes")
-
-const API_URL = "https://rickandmortyapi.com/api/character/?name=morty&status=alive"
+const inputBusqueda = document.getElementById("input_busqueda")
+const botonBusqueda = document.getElementById("boton_buscar")
 
 let personajesTotal = [];
 
-async function cargarPersonajes() {
-    try {
-        const response = await fetch(API_URL);
-        const personajes = await response.json(); 
 
-        personajesTotal = personajes;
-        mostrarPersonajes(personajesTotal);
-    } catch (error) {
-        console.log("Error al cargar los productos", error)
-    }
-}
 
 function mostrarPersonajes(personajes) {
-
+    contenedor_personajes.replaceChildren(); 
     personajes.results.forEach(personaje => {
         const contenedor_personaje = document.createElement("div")
         contenedor_personaje.classList.add("contenedor_personaje")
-        
+
         const img = document.createElement("img")
         img.setAttribute("src", personaje.image);
         img.setAttribute("alt", personaje.title);
@@ -43,4 +33,21 @@ function mostrarPersonajes(personajes) {
     });
 }
 
-cargarPersonajes()
+function busquedas() {
+    const inputValor = inputBusqueda.value.toLowerCase();
+    const API_URL = `https://rickandmortyapi.com/api/character/?name=${inputValor}`
+    async function cargarPersonajes() {
+        try {
+            const response = await fetch(API_URL);
+            const personajes = await response.json();
+
+            personajesTotal = personajes;
+            mostrarPersonajes(personajesTotal);
+        } catch (error) {
+            console.log("Error al cargar los productos", error)
+        }
+    }
+    cargarPersonajes()
+}
+
+botonBusqueda.addEventListener("click", busquedas)
