@@ -1,8 +1,9 @@
 const input_busqueda = document.getElementById("div__input");
 const boton_buscar = document.getElementById("div__boton");
 const seccionBusqueda = document.getElementById("section__busqueda");
+const seccionTareas = document.getElementById("section__tareas");
 
-const tareasTotal = [];
+let tareasTotal = [];
 
 const API_URL = `https://693393c24090fe3bf01d804d.mockapi.io/api/v1`;
 
@@ -45,10 +46,11 @@ async function agregarTarea(nombreTarea) {
     }
 }
 
-async function mostrarTareas() {
+async function cargarTareas() {
     try {
-        const tareas = await fetchAPI('tareas');
+        const tareas = await fetchAPI('tasks');
         tareasTotal = tareas;
+        mostrarTareas(tareasTotal);
         return tareasTotal;
     } catch (error) {
         console.log("Error al mostrar las tareas", error);
@@ -77,3 +79,19 @@ async function borrarTarea(id) {
         tareasTotal = tareasTotal.filter(tarea => tarea.id !== id);
     }
 }
+
+function mostrarTareas(tareas) {
+    tareas.forEach(tarea => {
+        const contenedor_tarea = document.createElement("div")
+        const nombreTarea = document.createElement("span");
+        nombreTarea.textContent = tarea.name;
+        const completar_button = document.createElement("button");
+        const borrar_button = document.createElement("button");
+        contenedor_tarea.appendChild(nombreTarea);
+        contenedor_tarea.appendChild(completar_button);
+        contenedor_tarea.appendChild(borrar_button);
+        seccionTareas.appendChild(contenedor_tarea);
+    })
+}
+
+cargarTareas();
