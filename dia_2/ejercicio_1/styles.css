@@ -1,0 +1,40 @@
+body {
+    background-color: rgb(44, 44, 44);
+}
+
+#section__busqueda {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 50vh;
+    gap: 16px;
+}
+
+#section__div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#span_titulo {
+    color: white;
+    font-size: 64px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#div__input {
+    width: 400px;
+    height: 20px;
+    border-radius: 8px;
+    border: none;
+    padding: 8px;
+    font-size: 18px;
+}
+
+#div__button {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    height: 35px;
+    border-radius: 5px;
+}
