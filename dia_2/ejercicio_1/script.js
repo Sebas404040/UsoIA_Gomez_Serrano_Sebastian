@@ -83,13 +83,25 @@ async function borrarTarea(id) {
 function mostrarTareas(tareas) {
     tareas.forEach(tarea => {
         const contenedor_tarea = document.createElement("div")
+        contenedor_tarea.classList.add("div__taskContainer");
+
         const nombreTarea = document.createElement("span");
+        nombreTarea.classList.add("span__taskName")
         nombreTarea.textContent = tarea.name;
-        const completar_button = document.createElement("button");
-        const borrar_button = document.createElement("button");
+
+        const completar_button = document.createElement("img");
+        completar_button.setAttribute("src", "./icons/complete.png");
+        completar_button.setAttribute("alt", "completar tarea");
+        completar_button.classList.add("img__buttons");
+
+        const borrar_button = document.createElement("img");
+        borrar_button.setAttribute("src", "./icons/delete.png");
+        borrar_button.setAttribute("alt", "borrar tarea");
+        borrar_button.classList.add("img__buttons");
+
         contenedor_tarea.appendChild(nombreTarea);
-        contenedor_tarea.appendChild(completar_button);
         contenedor_tarea.appendChild(borrar_button);
+        contenedor_tarea.appendChild(completar_button);
         seccionTareas.appendChild(contenedor_tarea);
     })
 }
