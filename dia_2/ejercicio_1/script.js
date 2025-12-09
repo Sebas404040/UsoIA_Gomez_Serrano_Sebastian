@@ -1,7 +1,8 @@
 const input_busqueda = document.getElementById("div__input");
-const boton_buscar = document.getElementById("div__boton");
+const boton_agregar = document.getElementById("div__button");
 const seccionBusqueda = document.getElementById("section__busqueda");
 const seccionTareas = document.getElementById("section__tareas");
+const boton_borrar = document.getElementById("div__deleteButton");
 
 let tareasTotal = [];
 
@@ -32,15 +33,23 @@ async function fetchAPI(endpoint, method = 'GET', body = null) {
     }
 }
 
-async function agregarTarea(nombreTarea) {
+async function agregarTarea() {
     try {
+        const inputValor = input_busqueda.value;
+        input_busqueda.value = '';
+        if (inputValor.trim() === '') {
+            return alert("El nombre de la tarea no puede estar vacía");
+        }
         const nuevaTarea = {
-            name: nombreTarea,
+            name: inputValor,
             completed: false
         }
 
         const tareaCreada = await fetchAPI('tasks', 'POST', nuevaTarea);
-        return tareaCreada;
+        if (tareaCreada) {
+            tareasTotal.push(tareaCreada);
+        }
+        mostrarTareas([tareaCreada]);
     } catch (error) {
         console.log("Error al agregar la tarea", error);
     }
@@ -51,7 +60,6 @@ async function cargarTareas() {
         const tareas = await fetchAPI('tasks');
         tareasTotal = tareas;
         mostrarTareas(tareasTotal);
-        return tareasTotal;
     } catch (error) {
         console.log("Error al mostrar las tareas", error);
     }
@@ -105,5 +113,7 @@ function mostrarTareas(tareas) {
         seccionTareas.appendChild(contenedor_tarea);
     })
 }
+
+boton_agregar.addEventListener("click", agregarTarea)
 
 cargarTareas();
