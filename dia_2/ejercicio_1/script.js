@@ -42,14 +42,14 @@ async function agregarTarea() {
         }
         const nuevaTarea = {
             name: inputValor,
-            completed: false
+            isCompleted: false
         }
 
         const tareaCreada = await fetchAPI('tasks', 'POST', nuevaTarea);
         if (tareaCreada) {
             tareasTotal.push(tareaCreada);
         }
-        mostrarTareas([tareaCreada]);
+        mostrarTareas(tareasTotal);
     } catch (error) {
         console.log("Error al agregar la tarea", error);
     }
@@ -81,14 +81,19 @@ async function editarTarea(id, estado) {
 }
 
 async function borrarTarea(id) {
-    const respuesta = await fetchAPI(`tasks/${id}`, "DELETE");
-
-    if (respuesta) {
-        tareasTotal = tareasTotal.filter(tarea => tarea.id !== id);
+    try {
+        const respuesta = await fetchAPI(`tasks/${id}`, "DELETE");
+        if (respuesta) {
+            tareasTotal = tareasTotal.filter(tarea => tarea.id !== id);
+        }
+        mostrarTareas(tareasTotal); 
+    } catch (error) {
+        console.log("Error al borrar la tarea", error);
     }
 }
 
 function mostrarTareas(tareas) {
+    seccionTareas.innerHTML = '';
     tareas.forEach(tarea => {
         const contenedor_tarea = document.createElement("div")
         contenedor_tarea.classList.add("div__taskContainer");
@@ -98,14 +103,16 @@ function mostrarTareas(tareas) {
         nombreTarea.textContent = tarea.name;
 
         const completar_button = document.createElement("img");
-        completar_button.setAttribute("src", "./icons/complete.png");
+        completar_button.setAttribute("src", "./icons/delete.png");
         completar_button.setAttribute("alt", "completar tarea");
         completar_button.classList.add("img__buttons");
+        completar_button.addEventListener("click", editarTarea.bind(null, tarea.id, tarea.is));
 
         const borrar_button = document.createElement("img");
-        borrar_button.setAttribute("src", "./icons/delete.png");
+        borrar_button.setAttribute("src", "./icons/complete.png");
         borrar_button.setAttribute("alt", "borrar tarea");
         borrar_button.classList.add("img__buttons");
+        borrar_button.addEventListener("click", () => borrarTarea(tarea.id));
 
         contenedor_tarea.appendChild(nombreTarea);
         contenedor_tarea.appendChild(borrar_button);
