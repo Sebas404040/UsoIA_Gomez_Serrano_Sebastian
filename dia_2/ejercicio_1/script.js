@@ -74,6 +74,7 @@ async function editarTarea(id, estado) {
         const index = tareasTotal.findIndex(tarea => tarea.id === id);
         if (index !== -1) {
             tareasTotal[index] = tareaEditada;
+            mostrarTareas(tareasTotal); 
         }
     } catch (error) {
         console.log("Error al editar la tarea", error);
@@ -100,13 +101,22 @@ function mostrarTareas(tareas) {
 
         const nombreTarea = document.createElement("span");
         nombreTarea.classList.add("span__taskName")
+        if (tarea.isCompleted) {
+            nombreTarea.style.textDecoration = "line-through";
+        }
         nombreTarea.textContent = tarea.name;
 
         const completar_button = document.createElement("img");
         completar_button.setAttribute("src", "./icons/delete.png");
         completar_button.setAttribute("alt", "completar tarea");
         completar_button.classList.add("img__buttons");
-        completar_button.addEventListener("click", editarTarea.bind(null, tarea.id, tarea.is));
+        completar_button.addEventListener("click", () => editarTarea(tarea.id, tarea.isCompleted));
+
+        if (tarea.isCompleted) {
+            completar_button.setAttribute("src", "./icons/cancel.png");
+            completar_button.setAttribute("alt", "descompletar tarea");
+        }
+
 
         const borrar_button = document.createElement("img");
         borrar_button.setAttribute("src", "./icons/complete.png");
