@@ -26,28 +26,29 @@
                     <form id="edit-form">
                         <input type="hidden" id="edit-product-id">
 
-                        <label for="edit-name">Nombre:</label>
-                        <input type="text" id="edit-name" required>
+                        <label for="edit-name" class="form-label">Nombre:</label>
+                        <input type="text" id="edit-name" class="form-input" required>
 
-                        <label for="edit-description">Descripción:</label>
-                        <textarea id="edit-description" required></textarea>
+                        <label for="edit-description" class="form-label">Descripción:</label>
+                        <textarea id="edit-description" class="form-input" required></textarea>
 
-                        <label for="edit-price">Precio:</label>
-                        <input type="number" id="edit-price" step="0.01"
+                        <label for="edit-price" class="form-label">Precio:</label>
+                        <input type="number" id="edit-price" class="form-input" step="0.01"
                             required>
 
-                        <label for="edit-category">Categoría:</label>
-                        <input type="text" id="edit-category" required>
+                        <label for="edit-category" class="form-label">Categoría:</label>
+                        <input type="text" id="edit-category" class="form-input" required>
 
-                        <label for="edit-image">URL de la Imagen:</label>
-                        <input type="text" id="edit-image" required>
+                        <label for="edit-image" class="form-label">URL de la Imagen:</label>
+                        <input type="text" id="edit-image" class="form-input" required>
 
                         <div class="stock-container">
                             <label for="edit-inStock">En Stock:</label>
                             <input type="checkbox" id="edit-inStock">
                         </div>
 
-                        <button type="submit">Guardar Cambios</button>
+                        <button type="submit" class="form-button">Guardar
+                            Cambios</button>
                     </form>
                 </div>
             </div>
