@@ -43,8 +43,8 @@
                         <input type="text" id="edit-image" class="form-input" required>
 
                         <div class="stock-container">
-                            <label for="edit-inStock">En Stock:</label>
-                            <input type="checkbox" id="edit-inStock">
+                            <label for="edit-stock">Stock:</label>
+                            <input type="number" id="edit-stock" class="form-input" min="0" required>
                         </div>
 
                         <button type="submit" class="form-button">Guardar
@@ -75,8 +75,8 @@
                         <input type="text" id="add-image" class="form-input" required>
 
                         <div class="stock-container">
-                            <label for="add-inStock">En Stock:</label>
-                            <input type="checkbox" id="add-inStock" checked>
+                            <label for="add-stock">Stock:</label>
+                            <input type="number" id="add-stock" class="form-input" min="0" value="0" required>
                         </div>
 
                         <button type="submit" class="form-button">Crear Producto</button>

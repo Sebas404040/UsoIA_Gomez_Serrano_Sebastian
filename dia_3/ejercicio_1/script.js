@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addPrice = document.getElementById('add-price');
     const addCategory = document.getElementById('add-category');
     const addImage = document.getElementById('add-image');
-    const addInStock = document.getElementById('add-inStock');
+    const addStock = document.getElementById('add-stock');
     const buttonAddProduct = document.getElementById('button__addProduct');
 
     const editForm = document.getElementById('edit-form');
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const editPrice = document.getElementById('edit-price');
     const editCategory = document.getElementById('edit-category');
     const editImage = document.getElementById('edit-image');
-    const editInStock = document.getElementById('edit-inStock');
+    const editStock = document.getElementById('edit-stock');
 
     let productosTotal = [];
     const API_URL = `https://693316e6e5a9e342d271e285.mockapi.io/api/v1`;
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             editPrice.value = parseFloat(producto.price);
             editCategory.value = producto.category;
             editImage.value = producto.image;
-            editInStock.checked = producto.inStock;
+            editStock.value = producto.stock;
             modal.style.display = 'block';
         }
     }
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function abrirModalCreacion() {
         addForm.reset();
-        addInStock.checked = true; 
+        addStock.value = 0; 
         addModal.style.display = 'block';
     }
 
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             price: parseFloat(addPrice.value),
             category: addCategory.value,
             image: addImage.value,
-            inStock: addInStock.checked,
+            stock: parseInt(addStock.value, 10),
         };
 
         try {
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             price: parseFloat(editPrice.value),
             category: editCategory.value,
             image: editImage.value,
-            inStock: editInStock.checked,
+            stock: parseInt(editStock.value, 10),
         };
 
         try {
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaProducto.classList.add('product__category');
 
             const stockProducto = document.createElement('p');
-            stockProducto.textContent = producto.stock;
+            stockProducto.textContent = `Disponibles: ${producto.stock}`;
             stockProducto.classList.add('product__stock');
 
             const imagenProducto = document.createElement('img');
