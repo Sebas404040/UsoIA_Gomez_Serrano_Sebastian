@@ -3,6 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const seccionProductos = document.getElementById("main__container");
     const modal = document.getElementById('edit-modal');
     const closeButton = document.querySelector('.close-button');
+
+    const addModal = document.getElementById('add-modal');
+    const addCloseButton = document.querySelector('#add-modal .close-button'); 
+    const addForm = document.getElementById('add-form');
+    const addName = document.getElementById('add-name');
+    const addDescription = document.getElementById('add-description');
+    const addPrice = document.getElementById('add-price');
+    const addCategory = document.getElementById('add-category');
+    const addImage = document.getElementById('add-image');
+    const addInStock = document.getElementById('add-inStock');
+    const buttonAddProduct = document.getElementById('button__addProduct');
+
     const editForm = document.getElementById('edit-form');
     const editProductId = document.getElementById('edit-product-id');
     const editName = document.getElementById('edit-name');
@@ -66,6 +78,29 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = 'none';
     }
 
+    function abrirModalCreacion() {
+        addForm.reset();
+        addInStock.checked = true; 
+        addModal.style.display = 'block';
+    }
+
+    function cerrarModalCreacion() {
+        addModal.style.display = 'none';
+    }
+
+    buttonAddProduct.addEventListener('click', abrirModalCreacion);
+    addCloseButton.addEventListener('click', cerrarModalCreacion);
+    window.addEventListener('click', (event) => {
+        if (event.target == addModal) {
+            cerrarModalCreacion();
+        }
+    });
+
+    addForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        await crearProducto();
+    });
+
     closeButton.addEventListener('click', cerrarModal);
     window.addEventListener('click', (event) => {
         if (event.target == modal) {
@@ -75,11 +110,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     editForm.addEventListener('submit', async (event) => {
         event.preventDefault();
+        await editarProducto(); // Llamada única, sin parámetros
+    });
+
+    async function crearProducto() {
+        const newProductData = {
+            name: addName.value,
+            description: addDescription.value,
+            price: parseFloat(addPrice.value),
+            category: addCategory.value,
+            image: addImage.value,
+            inStock: addInStock.checked,
+        };
+
+        try {
+            const productoCreado = await fetchAPI('tasks', 'POST', newProductData);
+            if (productoCreado) {
+                productosTotal.push(productoCreado);
+                mostrarProductos(productosTotal);
+                cerrarModalCreacion(); 
+            }
+        } catch (error) {
+            console.log("Error al crear el producto", error);
+        }
+    }
+
+    async function editarProducto() {
         const id = editProductId.value;
         const updatedData = {
             name: editName.value,
             description: editDescription.value,
-            price: editPrice.value,
+            price: parseFloat(editPrice.value),
             category: editCategory.value,
             image: editImage.value,
             inStock: editInStock.checked,
@@ -91,20 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index !== -1) {
                 productosTotal[index] = productoActualizado;
                 mostrarProductos(productosTotal);
-                cerrarModal();
-            }
-        } catch (error) {
-            console.log("Error al actualizar el producto", error);
-        }
-    });
-
-    async function editarProducto(id, updatedData) {
-        try {
-            const productoActualizado = await fetchAPI(`tasks/${id}`, 'PUT', updatedData);
-            const index = productosTotal.findIndex(producto => producto.id === id);
-            if (index !== -1) {
-                productosTotal[index] = productoActualizado;
-                mostrarProductos(productosTotal);
+                cerrarModal(); 
             }
         } catch (error) {
             console.log("Error al editar el producto", error);
@@ -148,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaProducto.classList.add('product__category');
 
             const stockProducto = document.createElement('p');
-            stockProducto.textContent = producto.inStock ? 'En stock' : 'Agotado';
+            stockProducto.textContent = producto.stock;
             stockProducto.classList.add('product__stock');
 
             const imagenProducto = document.createElement('img');

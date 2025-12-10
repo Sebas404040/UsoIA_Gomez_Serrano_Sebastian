@@ -116,13 +116,13 @@ body {
     margin-top: 5px;
     box-sizing: border-box;
 }
-#edit-form .stock-container {
+.stock-container { 
     display: flex;
     align-items: center;
     margin-top: 10px;
 }
 
-#edit-form .stock-container label {
+.stock-container label { 
     margin-top: 0;
     margin-right: 10px;
 }
