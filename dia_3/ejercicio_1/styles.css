@@ -176,3 +176,11 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.solo_producto {
+  display: grid !important;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+  padding: 2rem;
+}

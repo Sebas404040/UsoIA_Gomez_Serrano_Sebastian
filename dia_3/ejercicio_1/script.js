@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const addModal = document.getElementById('add-modal');
-    const addCloseButton = document.querySelector('#add-modal .close-button'); 
+    const addCloseButton = document.querySelector('#add-modal .close-button');
     const addForm = document.getElementById('add-form');
     const addName = document.getElementById('add-name');
     const addDescription = document.getElementById('add-description');
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function abrirModalCreacion() {
         addForm.reset();
-        addStock.value = 0; 
+        addStock.value = 0;
         addModal.style.display = 'block';
     }
 
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (productoCreado) {
                 productosTotal.push(productoCreado);
                 mostrarProductos(productosTotal);
-                cerrarModalCreacion(); 
+                cerrarModalCreacion();
             }
         } catch (error) {
             console.log("Error al crear el producto", error);
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index !== -1) {
                 productosTotal[index] = productoActualizado;
                 mostrarProductos(productosTotal);
-                cerrarModal(); 
+                cerrarModal();
             }
         } catch (error) {
             console.log("Error al editar el producto", error);
@@ -178,6 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function mostrarProductos(productos) {
         seccionProductos.innerHTML = '';
+
+        if (productos.length === 1) {
+            seccionProductos.classList.add("solo_producto");
+        } else {
+            seccionProductos.classList.remove("solo_producto");
+        }
+
         productos.forEach(producto => {
             const divContainer = document.createElement('div');
             divContainer.classList.add('product__card');
