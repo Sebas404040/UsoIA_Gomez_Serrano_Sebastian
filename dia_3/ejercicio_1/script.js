@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const seccionProductos = document.getElementById("main__container");
     const modal = document.getElementById('edit-modal');
     const closeButton = document.querySelector('.close-button');
+    const inputBusqueda = document.getElementById("input__section")
+    const botonBusqueda = document.getElementById("section__button")
+
 
     const addModal = document.getElementById('add-modal');
     const addCloseButton = document.querySelector('#add-modal .close-button'); 
@@ -230,5 +233,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function busquedas() {
+        const inputValor = inputBusqueda.value.toLowerCase();
+        const productosFiltrados = productosTotal.filter(producto =>
+            producto.name.toLowerCase().includes(inputValor)
+        );
+        mostrarProductos(productosFiltrados);
+    }
+    botonBusqueda.addEventListener('click', busquedas);
     cargarProductos();
 });
