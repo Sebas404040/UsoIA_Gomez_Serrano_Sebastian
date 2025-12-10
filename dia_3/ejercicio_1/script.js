@@ -161,10 +161,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const editarButton = document.createElement('button');
             editarButton.textContent = 'Editar';
+            editarButton.classList.add('button__edit');
             editarButton.addEventListener('click', () => abrirModalEdicion(producto.id));
 
             const eliminarButton = document.createElement('button');
             eliminarButton.textContent = 'Eliminar';
+            eliminarButton.classList.add('button__delete');
             eliminarButton.addEventListener('click', () => eliminarProducto(producto.id));
 
             divContainer.appendChild(imagenProducto);
