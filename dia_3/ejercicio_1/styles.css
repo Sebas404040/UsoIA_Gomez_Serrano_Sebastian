@@ -159,3 +159,20 @@ body {
     cursor: pointer;
     border-radius: 4px;
 }
+
+#main__addProduct {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin: 20px 0;
+    gap: 20px;
+}
+
+#button__addProduct {
+    padding: 10px 20px;
+    background-color: #e44d01;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
