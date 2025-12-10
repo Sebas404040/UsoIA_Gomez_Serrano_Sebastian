@@ -1,9 +1,27 @@
+@font-face {
+    font-family: "Rubik-Bold";
+    src: url("./fonts/Rubik-Bold.ttf") format("opentype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik-Light";
+    src: url("./fonts/Rubik-Light.ttf") format("opentype");
+    font-weight: lighter;
+    font-style: normal;
+}
+
 body {
+    font-family: "Rubik-Light", Arial, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
     background-color: gray;
+}
+
+h3 {
+    font-family: "Rubik-Bold", Arial, sans-serif;
 }
 
 #body__header {
@@ -34,6 +52,7 @@ body {
     border: 2px solid rgb(229, 92, 38);
     padding: 8px;
     font-size: 16px;
+    font-family: "Rubik-Light", Arial, sans-serif;
 }
 
 #section__button {
@@ -43,6 +62,7 @@ body {
     background-color: rgb(229, 92, 38);
     color: white;
     border: none;
+    font-family: "Rubik-Light", Arial, sans-serif;
 }
 
 #section__button:hover {
@@ -135,11 +155,13 @@ body {
     border: none;
     cursor: pointer;
     border-radius: 4px;
+    font-family: "Rubik-Light", Arial, sans-serif;
 }
 
 .div__buttons {
     display: flex;
     justify-content: space-around;
+    font-family: "Rubik-Light", Arial, sans-serif;
 }
 
 .button__edit {
@@ -149,6 +171,7 @@ body {
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 4px;
+    font-family: "Rubik-Light", Arial, sans-serif;
 }
 
 .button__delete {
@@ -158,6 +181,7 @@ body {
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 4px;
+    font-family: "Rubik-Light", Arial, sans-serif;
 }
 
 #main__addProduct {
