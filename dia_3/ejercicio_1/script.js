@@ -37,6 +37,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function editarProducto(id, updatedData) {
+        try {
+            const productoActualizado = await fetchAPI(`tasks/${id}`, 'PUT', updatedData);
+            const index = productosTotal.findIndex(producto => producto.id === id);
+            if (index !== -1) {
+                productosTotal[index] = productoActualizado;
+                mostrarProductos(productosTotal);
+            }
+        } catch (error) {
+            console.log("Error al editar el producto", error);
+        }
+    }
+
+    async function eliminarProducto(id) {
+        try {
+            const respuesta = await fetchAPI(`tasks/${id}`, 'DELETE');
+            if (respuesta) {
+                productosTotal = productosTotal.filter(producto => producto.id !== id);
+                mostrarProductos(productosTotal);
+            }
+        } catch (error) {
+            console.log("Error al eliminar el producto", error);
+        }
+    }
+
     function mostrarProductos(productos) {
         seccionProductos.innerHTML = '';
         productos.forEach(producto => {
